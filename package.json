@@ -1,0 +1,112 @@
+{
+	"name": "code-shaker",
+	"displayName": "Code Shaker",
+	"description": "An extension which can mess with your code in fun ways",
+	"version": "1.0.0",
+	"publisher": "FizzyApple12",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"activationEvents": [
+		"onCommand:codeShaker.activateInWindow",
+		"onCommand:codeShaker.deactivateInWindow",
+		"onView:scripterView"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "codeShaker.activateInWindow",
+				"title": "Activate Code Shaker in the current window",
+				"category": "Code Shaker"
+			},
+			{
+				"command": "codeShaker.deactivateInWindow",
+				"title": "Deactivate Code Shaker in the current window",
+				"category": "Code Shaker"
+			},
+			{
+				"command": "codeShakerScripter.addScript",
+				"title": "Add",
+				"icon": {
+					"light": "assets/add-l.svg",
+					"dark": "assets/add-l.svg"
+				}
+			},
+			{
+				"command": "codeShakerScripter.deleteScript",
+				"title": "Delete",
+				"icon": {
+					"light": "assets/delete-d.svg",
+					"dark": "assets/delete-l.svg"
+				}
+			},
+			{
+				"command": "codeShakerScripter.editValue",
+				"title": "Edit",
+				"icon": {
+					"light": "assets/edit-d.svg",
+					"dark": "assets/edit-l.svg"
+				}
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "scripter",
+					"title": "Code Shaker Scripter",
+					"icon": "assets/scripter.svg"
+				}
+			]
+		},
+		"views": {
+			"scripter": [
+				{
+					"id": "scripterView",
+					"name": "Code Shaker Scripter",
+					"icon": "assets/scripter.svg",
+					"contextualTitle": "Code Shaker"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "codeShakerScripter.addScript",
+					"when": "view == scripterView",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "codeShakerScripter.deleteScript",
+					"when": "view == scripterView && viewItem == script",
+					"group": "inline"
+				},
+				{
+					"command": "codeShakerScripter.editValue",
+					"when": "view == scripterView && viewItem == value",
+					"group": "inline"
+				}
+			]
+		},
+		"configuration": [
+			{
+				"title": "Code Shaker",
+				"properties": {
+					"codeShaker.scripts": {
+						"type": "array",
+						"default": []
+					}
+				}
+			}
+		]
+	},
+	"scripts": {},
+	"devDependencies": {
+		"@types/vscode": "^1.32.0"
+	},
+	"dependencies": {
+		"axios": "^0.19.2"
+	}
+}
